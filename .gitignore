@@ -1,0 +1,10 @@
+# Mos përfshi çelësin sekret
+/resources/config.properties
+
+# IntelliJ IDEA
+.idea/
+*.iml
+
+# Java compiled output
+/out/
+target/
