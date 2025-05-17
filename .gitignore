@@ -1,5 +1,5 @@
-# Mos përfshi çelësin sekret
-/resources/config.properties
+# Mos me perfshi celesin sekret
+resources/config.properties
 
 # IntelliJ IDEA
 .idea/
