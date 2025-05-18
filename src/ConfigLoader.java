@@ -1,4 +1,3 @@
-
 import java.io.InputStream;
 import java.util.Properties;
 
@@ -22,4 +21,5 @@ public class ConfigLoader {
         System.out.println("Çelësi i ngarkuar: " + secret); //celesii
     }
 }
+
 
