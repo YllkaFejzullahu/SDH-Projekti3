@@ -25,7 +25,7 @@ IntelliJ IDEA ose IDE tjetër për Java
   2. Hap projektin në IntelliJ IDEA ose IDE-në tuaj.
 
   3. Sigurohu që skedari `config.properties` të ekzistojë dhe përmban një çelës:
-   secret_key=KyEshteNjeSekret123
+   secret_key=MY_SUPER_SECRET_HMAC_KEY_123!
 
   4. Ekzekuto fillimisht serverin:
    Run -> Run 'HMACServer'
