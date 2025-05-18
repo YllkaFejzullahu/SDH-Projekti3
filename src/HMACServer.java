@@ -15,10 +15,11 @@ public class HMACServer {
         char[] secretKeyChars = null;
         try {
             secretKeyChars = ConfigLoader.loadSecretKey();
-
+            LoggerUtil.log("Secret key successfully loaded by server.");
 
             try (ServerSocket serverSocket = new ServerSocket(SERVER_PORT)) {
-                System.out.println("Server started and awaiting messages...");
+                LoggerUtil.log("Server started and awaiting messages...");
+
 
                 while (true) {
                     try (Socket clientSocket = serverSocket.accept();
@@ -29,6 +30,7 @@ public class HMACServer {
                         String[] parts = received.split("::");
 
                         if (parts.length != 3) {
+                            LoggerUtil.log("Invalid message format received.");
                             out.write("Invalid message format.\n");
                             out.flush();
                             continue;
@@ -38,15 +40,16 @@ public class HMACServer {
                         String receivedHMAC = parts[2];
 
                         if (!isTimestampValid(timestamp)) {
-                            System.out.println("Message rejected due to invalid or expired timestamp.");
+                            LoggerUtil.log("Message rejected due to invalid or expired timestamp.");
                             out.write("Message rejected: invalid or expired timestamp.\n");
                             out.flush();
                             continue;
                         }
 
 
-                        System.out.println("Message received with HMAC: [" + timestamp + " | " + message + " | " + receivedHMAC + "]");
-                        System.out.println("Validating HMAC...");
+                        LoggerUtil.log("Message received with HMAC: [" + timestamp + " | " + message + " | " + receivedHMAC + "]");
+                        LoggerUtil.log("Validating HMAC...");
+
 
                         String messageToVerify = timestamp + "::" + message;
                         String calculatedHMAC = generateHMAC(messageToVerify, secretKeyChars);
@@ -54,28 +57,29 @@ public class HMACServer {
 
 
                         if (timingSafeEqual(receivedHMAC, calculatedHMAC)) {
-                            System.out.println("Message verified successfully. Integrity and authenticity confirmed.");
+                            LoggerUtil.log("Message verified successfully. Integrity and authenticity confirmed.");
+
                             out.write("Message verified successfully.\n");
                         } else {
-                            System.out.println("HMAC verification failed. Message integrity compromised.");
+                            LoggerUtil.log("HMAC verification failed. Message integrity compromised.");
                             out.write("HMAC verification failed.\n");
                         }
 
                         out.flush();
                     } catch (IOException e) {
-                        System.err.println("Error handling client connection: " + e.getMessage());
+                        LoggerUtil.logError("Error handling client connection", e);
                     }
                 }
 
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            LoggerUtil.logError("Fatal error in server", e);
         }finally {
             // Pastrimi i çelësit nga memoria kur serveri mbyllet ose kur ka ndonjë gabim fatal
             if (secretKeyChars != null) {
                 java.util.Arrays.fill(secretKeyChars, '\0');
-                System.out.println("Secret key cleared from memory.");
+                LoggerUtil.log("Secret key cleared from memory.");
             }
         }
     }

@@ -14,6 +14,7 @@ public class HMACClient {
     public static void main(String[] args) {
         try {
             char[] secretKeyChars = ConfigLoader.loadSecretKey();
+            LoggerUtil.log("Secret key successfully loaded by client.");
 
 
             Scanner scanner = new Scanner(System.in);
@@ -23,24 +24,29 @@ public class HMACClient {
             String timestamp = Instant.now().toString(); // shto timestamp
             String messageToSend = timestamp + "::" + message; // kombinim për HMAC
             String hmac = generateHMAC(messageToSend, secretKeyChars);
+            LoggerUtil.log("Generated HMAC: " + hmac);
 
             try (Socket socket = new Socket(SERVER_HOST, SERVER_PORT);
                  DataOutputStream out = new DataOutputStream(socket.getOutputStream());
                  BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
-
+                LoggerUtil.log("Connecting to server at " + SERVER_HOST + ":" + SERVER_PORT);
                 String combined = timestamp + "::" + message + "::" + hmac;
-                System.out.println("Sending message with HMAC: [" + combined + "]");
+                LoggerUtil.log("Sending message with HMAC: [" + combined + "]");
+
                 out.writeUTF(combined);
+                LoggerUtil.log("Message with timestamp and HMAC sent to server.");
 
                 String response = in.readLine();
-                System.out.println("Server response: " + response);
+                LoggerUtil.log("Server response: " + response);
+
             }
             // Pastrimi i çelësit nga memoria:
             java.util.Arrays.fill(secretKeyChars, '\0');
 
         } catch (Exception e) {
-            e.printStackTrace();
+            LoggerUtil.logError("An error occurred in the client", e);
         }
+
     }
 
     private static String generateHMAC(String message, char[] secretChars) throws Exception {
