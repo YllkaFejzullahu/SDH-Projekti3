@@ -20,8 +20,8 @@ public class HMACClient {
             System.out.print("Enter your message: ");
             String message = scanner.nextLine();
 
-            String timestamp = Instant.now().toString(); // shto timestamp
-            String messageToSend = timestamp + "::" + message; // kombinim për HMAC
+            String timestamp = Instant.now().toString();
+            String messageToSend = timestamp + "::" + message;
             String hmac = generateHMAC(messageToSend, secretKeyChars);
 
             try (Socket socket = new Socket(SERVER_HOST, SERVER_PORT);
@@ -35,7 +35,6 @@ public class HMACClient {
                 String response = in.readLine();
                 System.out.println("Server response: " + response);
             }
-            // Pastrimi i çelësit nga memoria:
             java.util.Arrays.fill(secretKeyChars, '\0');
 
         } catch (Exception e) {
