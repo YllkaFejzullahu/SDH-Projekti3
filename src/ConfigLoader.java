@@ -1,11 +1,11 @@
 import java.io.InputStream;
 import java.util.Properties;
 
-public class ConfigLoader {
-    public static String loadSecretKey() {
-        try (InputStream input = ConfigLoader.class.getClassLoader().getResourceAsStream("config.properties")) {
+public class ConfigLoader { //.
+    public static String loadSecretKey() { //.
+        try (InputStream input = ConfigLoader.class.getClassLoader().getResourceAsStream("config.properties")) { //.
             Properties prop = new Properties();
-            if (input == null) {
+            if (input == null) {  //.
                 throw new RuntimeException("Skedari config.properties nuk u gjet!");
             }
             prop.load(input);
@@ -21,5 +21,3 @@ public class ConfigLoader {
         System.out.println("Çelësi i ngarkuar: " + secret); //celesii
     }
 }
-
-
