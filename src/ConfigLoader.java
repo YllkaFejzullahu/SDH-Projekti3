@@ -19,7 +19,7 @@ public class ConfigLoader {
 
     public static void main(String[] args) {
         String secret = loadSecretKey();
-        System.out.println("Çelësi i ngarkuar: " + secret);
+        System.out.println("Çelësi i ngarkuar: " + secret); //celesi
     }
 }
 
