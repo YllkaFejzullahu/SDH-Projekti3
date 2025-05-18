@@ -7,76 +7,96 @@ Ai është krijuar për qëllime mësimore në fushën e sigurisë së të dhën
 
 Ky projekt ilustron:
 
-Si të gjenerosh dhe verifikosh nënshkrime HMAC në Java.
-Si të ngarkosh konfigurime nga një file të jashtëm.
-Strukturimin e një aplikacioni të thjeshtë me module të ndara.
+* Si të gjenerosh dhe verifikosh nënshkrime HMAC në Java.
+* Si të ngarkosh konfigurime nga një file të jashtëm.
+* Strukturimin e një aplikacioni të thjeshtë me module të ndara.
 
 -Teknologjitë e Përdorura
 
-Java (JDK 8 ose më i lartë),
+* Java (JDK 8 ose më i lartë),
 
-IntelliJ IDEA si ambient zhvillimi,
+* IntelliJ IDEA si ambient zhvillimi,
 
-Algoritmi HMAC-SHA256
+* Algoritmi HMAC-SHA256
 
 
 -Si të Ekzekutosh Projektin Lokalisht
 
 1. Kërkesat paraprake
 
-Java SDK i instaluar (java -version)
+* Java SDK i instaluar (java -version)
 
-IntelliJ IDEA ose IDE tjetër për Java
+* IntelliJ IDEA ose IDE tjetër për Java
 
 2. Hapat
 
-*Klono këtë repo:
+* Klono këtë repo:
    git clone https://github.com/emriYT/SDH-Projekti3.git
 
-*Hap projektin në IntelliJ IDEA.
+* Hap projektin në IntelliJ IDEA ose IDE-në tuaj.
 
-*Shko te Run -> Run 'HMACServer' për të nisur serverin.
-Pastaj Run -> Run 'HMACClient' për të dërguar mesazhin.
+* Sigurohu që skedari `config.properties` të ekzistojë dhe përmban një çelës:
+   secret_key=KyEshteNjeSekret123
+
+* Ekzekuto fillimisht serverin:
+   Run -> Run 'HMACServer'
+
+* Pastaj ekzekuto klientin:
+   Run -> Run 'HMACClient'
+
+* Shiko rezultatet në Console.
 
 -Si Funksionon HMAC në këtë Projekt
 
-Serveri ka një çelës sekret të ruajtur në config.properties.
+* Serveri dhe klienti ndajnë të njëjtin çelës sekret (nga config.properties).
 
-Klienti gjeneron një mesazh dhe e nënshkruan atë me HMAC-SHA256 duke përdorur çelësin.
+* Klienti merr një mesazh, krijon HMAC-in përkatës dhe e dërgon së bashku me mesazhin te serveri.
 
-Serveri merr mesazhin dhe HMAC-in, dhe verifikon nënshkrimin për të siguruar që mesazhi nuk është ndryshuar.
+* Serveri përdor çelësin për të rigjeneruar HMAC-in e pritur dhe e krahason me atë të dërguar nga klienti.
+
+* Nëse përputhen, mesazhi konsiderohet i besueshëm.
 
 
--Shembull Testimi
+-Shembull Testimi dhe Output
 
-Ky është një shembull testimi i thjeshtë për të provuar funksionimin e sistemit:
-
-Input nga Klienti:
+* Input nga Klienti:
 
 Mesazh: Pershendetje Server!
 
 Çelësi: KyEshteNjeSekret123
 
-Output nga Serveri:
+* Output nga Serveri:
+
+Serveri është duke pritur mesazhe...
 
 Mesazhi u pranua: Pershendetje Server!
+
+HMAC i pranuar: d2f5a23a... [shkurtuar]
+
+HMAC i llogaritur: d2f5a23a... [shkurtuar]
 
 HMAC valid: PO
 
-Nëse HMAC nuk përputhet:
+* Nëse ndodh manipulim i mesazhit ose çelësit:
+
+Serveri është duke pritur mesazhe...
 
 Mesazhi u pranua: Pershendetje Server!
 
+HMAC i pranuar: 000000000000000000000000
+
+HMAC i llogaritur: d2f5a23a...
+
 HMAC valid: JO
 
-Ky test tregon që komunikimi është i sigurt dhe manipulimi i mesazhit ose çelësit shkakton dështim të verifikimit.
+-Pamje nga Ekzekutimi
 
 -Konfigurimi
 
-Konfigurimi ndodhet në skedarin config.properties. Shembull:
+Skedari config.properties duhet të përmbajë rreshtin e mëposhtëm:
 
 secret_key=KyEshteNjeSekret123
 
-Ky file nuk duhet të dërgohet në publik nëse projekti bëhet real!
+Ky file nuk duhet të ndahet në publik për aplikime reale, pasi përmban informacione sensitive.
 
 
