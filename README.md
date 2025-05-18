@@ -20,7 +20,7 @@ IntelliJ IDEA ose IDE tjetër për Java
 
 2. Hapat
   1. Klono këtë repo:
-   git clone https://github.com/emriYT/SDH-Projekti3.git
+   git clone https://github.com/YllkaFejzullahu/SDH-Projekti3.git
 
   2. Hap projektin në IntelliJ IDEA ose IDE-në tuaj.
 
@@ -38,22 +38,29 @@ IntelliJ IDEA ose IDE tjetër për Java
 Shembull Testimi dhe Output
 
 Input nga Klienti:
-Mesazh: Pershendetje Server!
+Mesazh: Pershendetje!
 Çelësi: Kyeshtenjesekret1
 
-Output në Server:
-Serveri është duke pritur mesazhe...
-Mesazhi u pranua: Pershendetje Server!
-HMAC i pranuar: d2f5a23a... [shkurtuar]
-HMAC i llogaritur: d2f5a23a... [shkurtuar]
-HMAC valid: PO
+Kur behet run te Klienti:
+=== HMAC CLIENT ===
+2025-05-18 22:01:02.739 [INFO] Secret key successfully loaded by client.
+Enter your message: Pershendetje!
+2025-05-18 22:01:09.341 [INFO] Generated HMAC: dee63748824f71ed7162c1de387501120aa393e015a052155a9e121d6c6c9eb6
+Sending message with HMAC: [Pershendetje! | dee63748824f71ed7162c1de387501120aa393e015a052155a9e121d6c6c9eb6]
+2025-05-18 22:01:09.342 [INFO] Connecting to server at localhost:12345
+2025-05-18 22:01:09.343 [INFO] Sending message with HMAC: [2025-05-18T20:01:09.300065700Z::Pershendetje!::dee63748824f71ed7162c1de387501120aa393e015a052155a9e121d6c6c9eb6]
+2025-05-18 22:01:09.344 [INFO] Message with timestamp and HMAC sent to server.
+2025-05-18 22:01:09.378 [INFO] Server response: Message verified successfully.
 
-Nëse ndodh manipulim i mesazhit ose çelësit:
-Serveri është duke pritur mesazhe...
-Mesazhi u pranua: Pershendetje Server!
-HMAC i pranuar: 000000000000000000000000
-HMAC i llogaritur: d2f5a23a...
-HMAC valid: JO
+
+Output në Server:
+==== HMAC SERVER ====
+2025-05-18 22:00:56.633 [INFO] Secret key successfully loaded by server.
+2025-05-18 22:00:56.645 [INFO] Server started and awaiting messages...
+2025-05-18 22:01:09.349 [INFO] Message received with HMAC: [2025-05-18T20:01:09.300065700Z | Pershendetje! | dee63748824f71ed7162c1de387501120aa393e015a052155a9e121d6c6c9eb6]
+2025-05-18 22:01:09.349 [INFO] Validating HMAC...
+2025-05-18 22:01:09.378 [INFO] Message verified successfully. Integrity and authenticity confirmed.
+
 
 Konfigurimi
 Skedari config.properties duhet të përmbajë rreshtin e mëposhtëm:
