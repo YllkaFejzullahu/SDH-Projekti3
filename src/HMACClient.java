@@ -12,13 +12,14 @@ public class HMACClient {
     private static final int SERVER_PORT = 12345;
 
     public static void main(String[] args) {
+        System.out.println(" === HMAC CLIENT ===");
         try {
             char[] secretKeyChars = ConfigLoader.loadSecretKey();
             LoggerUtil.log("Secret key successfully loaded by client.");
 
 
             Scanner scanner = new Scanner(System.in);
-            System.out.print("Enter your message: ");
+            System.out.print("Enter your message to send to the server: ");
             String message = scanner.nextLine();
 
             String timestamp = Instant.now().toString();
@@ -43,7 +44,7 @@ public class HMACClient {
             java.util.Arrays.fill(secretKeyChars, '\0');
 
         } catch (Exception e) {
-            LoggerUtil.logError("An error occurred in the client", e);
+            LoggerUtil.logError(" An error occurred in the client", e);
         }
 
     }

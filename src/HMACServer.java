@@ -12,6 +12,7 @@ public class HMACServer {
     private static final int SERVER_PORT = 12345;
 
     public static void main(String[] args) {
+        System.out.println("==== HMAC SERVER ====");
         char[] secretKeyChars = null;
         try {
             secretKeyChars = ConfigLoader.loadSecretKey();
