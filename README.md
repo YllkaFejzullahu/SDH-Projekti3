@@ -39,7 +39,7 @@ Shembull Testimi dhe Output
 
 Input nga Klienti:
 Mesazh: Pershendetje Server!
-Çelësi: KyEshteNjeSekret123
+Çelësi: MY_SUPER_SECRET_HMAC_KEY_123!
 
 Output në Server:
 Serveri është duke pritur mesazhe...
@@ -57,5 +57,5 @@ HMAC valid: JO
 
 Konfigurimi
 Skedari config.properties duhet të përmbajë rreshtin e mëposhtëm:
-secret_key=KyEshteNjeSekret123
+secret_key=MY_SUPER_SECRET_HMAC_KEY_123!
 Ky file nuk duhet të ndahet në publik për aplikime reale, pasi përmban informacione sensitive.
