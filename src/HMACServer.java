@@ -76,7 +76,6 @@ public class HMACServer {
         } catch (Exception e) {
             LoggerUtil.logError("Fatal error in server", e);
         }finally {
-            // Pastrimi i çelësit nga memoria kur serveri mbyllet ose kur ka ndonjë gabim fatal
             if (secretKeyChars != null) {
                 java.util.Arrays.fill(secretKeyChars, '\0');
                 LoggerUtil.log("Secret key cleared from memory.");
@@ -108,8 +107,6 @@ public class HMACServer {
     }
 
 
-
-    // Prevents timing attacks by comparing HMACs in constant time
     private static boolean timingSafeEqual(String a, String b) {
         if (a.length() != b.length()) return false;
         int result = 0;
@@ -125,7 +122,6 @@ public class HMACServer {
             Instant now = Instant.now();
             Duration diff = Duration.between(messageTime, now);
             long seconds = diff.getSeconds();
-            // Lejo vetëm mesazhe brenda 10 sekondave
             return seconds >= 0 && seconds <= 10;
         } catch (Exception e) {
             return false;
