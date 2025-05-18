@@ -8,3 +8,19 @@ resources/config.properties
 # Java compiled output
 /out/
 target/
+
+# Output folders
+out/
+bin/
+
+# Compiled class files
+*.class
+
+# Logs & temporary
+*.log
+*.tmp
+*.swp
+
+# OS files
+.DS_Store
+Thumbs.db
