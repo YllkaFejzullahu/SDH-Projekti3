@@ -1,10 +1,27 @@
 # Mos me perfshi celesin sekret
 resources/config.properties
 
-# IntelliJ IDEA
-.idea/
-*.iml
 
 # Java compiled output
 /out/
 target/
+
+# IntelliJ IDEA
+.idea/
+*.iml
+
+# Output folders
+out/
+bin/
+
+# Compiled class files
+*.class
+
+# Logs & temporary
+*.log
+*.tmp
+*.swp
+
+# OS files
+.DS_Store
+Thumbs.db
