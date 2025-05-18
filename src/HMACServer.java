@@ -98,7 +98,7 @@ public class HMACServer {
             }
             return hexString.toString();
         } finally {
-            java.util.Arrays.fill(secretBytes, (byte) 0);  // Pastrim bytes nga memoria
+            java.util.Arrays.fill(secretBytes, (byte) 0);
         }
     }
 

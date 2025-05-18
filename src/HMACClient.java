@@ -19,7 +19,7 @@ public class HMACClient {
 
 
             Scanner scanner = new Scanner(System.in);
-            System.out.print("Enter your message to send to the server: ");
+            System.out.print("Enter your message: ");
             String message = scanner.nextLine();
 
             String timestamp = Instant.now().toString();
@@ -27,19 +27,21 @@ public class HMACClient {
             String hmac = generateHMAC(messageToSend, secretKeyChars);
             LoggerUtil.log("Generated HMAC: " + hmac);
 
+            System.out.println("Sending message with HMAC: [" + message + " | " + hmac + "]");
+
+
             try (Socket socket = new Socket(SERVER_HOST, SERVER_PORT);
                  DataOutputStream out = new DataOutputStream(socket.getOutputStream());
                  BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
+
                 LoggerUtil.log("Connecting to server at " + SERVER_HOST + ":" + SERVER_PORT);
                 String combined = timestamp + "::" + message + "::" + hmac;
                 LoggerUtil.log("Sending message with HMAC: [" + combined + "]");
-
                 out.writeUTF(combined);
                 LoggerUtil.log("Message with timestamp and HMAC sent to server.");
 
                 String response = in.readLine();
                 LoggerUtil.log("Server response: " + response);
-
             }
             java.util.Arrays.fill(secretKeyChars, '\0');
 
